@@ -8,7 +8,7 @@ const conexion = require('./config/conexion')
 router.get('/',(req, res)=>{
     let sql = 'SELECT * FROM db_users.persona'
     conexion.query(sql,(err, rows, fields)=>{
-        if(err) throw err;
+        if(err) {throw err;}
         else{
             res.json(rows)
         }
@@ -20,7 +20,7 @@ router.get('/:id',(req, res)=>{
     const {id} = req.params
     let sql = 'SELECT * FROM db_users.persona where id_persona = ?'
     conexion.query(sql,[id],(err, rows, fields)=>{
-        if(err) throw err;
+        if(err) {throw err;}
         else{
             res.json(rows)
         }
@@ -33,7 +33,7 @@ router.post('/',(req, res)=>{
 
     let sql = `insert into db_users.persona(nombre, apellidos, celular, correo, direccion) values('${nombre}','${apellidos}','${celular}','${correo}','${direccion}')` 
     conexion.query(sql, (err, rows, fields)=>{
-        if(err) throw err
+        if(err){throw err;}
         else{
             res.json({status: 'persona agregada'})
         }
@@ -46,7 +46,7 @@ router.delete('/:id',(req, res)=>{
 
     let sql = `delete from db_users.persona where id_persona = '${id}'`
     conexion.query(sql, (err, rows, fields)=>{
-        if(err) throw err
+        if(err) {throw err}
         else{
             res.json({status: 'persona eliminado'})
         }
@@ -67,7 +67,7 @@ router.put('/:id',(req, res)=>{
                 where id_persona = '${id}'`
 
     conexion.query(sql, (err, rows, fields)=>{
-        if(err) throw err
+        if(err){throw err}
         else{
             res.json({status: 'persona editada'})
         }
